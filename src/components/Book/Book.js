@@ -30,6 +30,10 @@ const Book = () => {
     setSelectedDate(newDates);
   };
 
+  const handleBooking = () => {
+    console.log('booking set');
+  };
+
   return (
     <div style={{ textAlign: 'center' }}>
       <h1>hello {loggedInUser.name}</h1>
@@ -68,7 +72,7 @@ const Book = () => {
               }}
             />
           </Grid>
-          <Button variant="contained" color="primary">
+          <Button onClick={handleBooking} variant="contained" color="primary">
             Book Now
           </Button>
         </MuiPickersUtilsProvider>
