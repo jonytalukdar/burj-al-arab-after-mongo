@@ -10,6 +10,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import 'date-fns';
+import Bookings from '../Bookings/Bookings';
 
 const Book = () => {
   const { bedType } = useParams();
@@ -31,20 +32,26 @@ const Book = () => {
   };
 
   const handleBooking = () => {
-    console.log('booking set');
+    const newBooking = { ...loggedInUser, ...selectedDate };
+    fetch('http://localhost:5000/addBooking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newBooking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', padding: '12px 0' }}>
       <h1>hello {loggedInUser.name}</h1>
       <h1>Let's book a {bedType} Room.</h1>
       <p>
         Want a <Link to="/home">different room?</Link>{' '}
       </p>
-      export default function MaterialUIPickers(){' '}
       {
-        // The first commit of Material-UI
-
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justify="space-around">
             <KeyboardDatePicker
@@ -77,6 +84,7 @@ const Book = () => {
           </Button>
         </MuiPickersUtilsProvider>
       }
+      <Bookings></Bookings>
     </div>
   );
 };
